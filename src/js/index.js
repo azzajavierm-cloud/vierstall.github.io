@@ -12,7 +12,7 @@ canvas.height = DISPLAY_PIXEL.HEIGHT * ASPECT_RATIO.HEIGHT
 const playerProperty = {
     width: 64,
     height: 64,
-    speed: 1.5,
+    speed: 5,
     color: "tomato",
     position: {
         x: 0, 
@@ -20,17 +20,17 @@ const playerProperty = {
     }
 }
 
-// Property Enemy
-const enemyProperty = {
-    width: 64,
-    height: 64,
-    speed: 1.5,
-    color: "lightyellow",
-    position: {
-        x: canvas.width - 64, 
-        y: canvas.height - 64
-    }
-}
+// // Property Enemy
+// const enemyProperty = {
+//     width: 64,
+//     height: 64,
+//     speed: 1.5,
+//     color: "lightyellow",
+//     position: {
+//         x: canvas.width - 64, 
+//         y: canvas.height - 64
+//     }
+// }
 
 // Buat Kelas Ground
 const ground = new Ground(canvas.width, canvas.height, "lightblue") //cuma instance belum di panggil methodnya
@@ -39,7 +39,7 @@ const ground = new Ground(canvas.width, canvas.height, "lightblue") //cuma insta
 const player = new Player(playerProperty) //cuma instance belum di panggil methodnya
 
 // Buat Kelas Enemy
-const enemy = new Enemy(enemyProperty) //cuma instance belum di panggil methodnya
+// const enemy = new Enemy(enemyProperty) //cuma instance belum di panggil methodnya
 
 
 
@@ -47,16 +47,16 @@ const enemy = new Enemy(enemyProperty) //cuma instance belum di panggil methodny
 function animate() {
     ground.create() // baru di panggil methodnya untuk membuat papan permainannya
     player.create() 
-    enemy.create()
+    // enemy.create()
 
     player.update()
-    enemy.update()
+    // enemy.update()
 
     window.requestAnimationFrame(animate) // untuk membuat animasi terus berjalan
 }
 
 window.addEventListener("keydown", function (callback){
-    console.log(callback)
+    player.movement(callback.key)
 })
 
 animate() // untuk memulai animasi
