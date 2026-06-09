@@ -31,29 +31,28 @@ class Player {
     }
 
     moveLeft() {
-        return player.velocity.x = -1 * player.speed
+        return this.velocity.x = -1 * this.speed
     }
 
     update() {
         const ground = canvas.height - this.height
-        const invisibleLeftWall = 0
         const invisibleRightWall = canvas.width - this.width
 
         this.velocity.y += this.gravity
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
         
-        if(player.position.y > ground) {
+        if(this.position.y > ground) {
             this.position.y = ground
             this.jump() // untuk membuat player melompat terus menerus ketika menyentuh tanah
         }
 
-        if(player.position.x < invisibleLeftWall) {
-            this.position.x -= invisibleLeftWall
+        if(this.position.x < 0) {
+            this.velocity.x *= -1 
         }
 
-        if(player.position.x > invisibleRightWall) {
-            this.position.x += invisibleRightWall
+        if(this.position.x > invisibleRightWall) {
+            this.velocity.x *= -1
         }
     }
 
