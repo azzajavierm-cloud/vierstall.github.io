@@ -19,5 +19,6 @@ class Ground {
         // board.fillRect(0, 0, this.width, this.height)
 
         board.drawImage(this.image, this.position.x, this.position.y)
+        board.drawImage(this.image, this.position.x, this.position.y, this.width, this.height) // untuk menyesuaikan ukuran gambar dengan ukuran canvas
     }
 }
