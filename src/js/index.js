@@ -60,7 +60,23 @@ function animate() {
 }
 
 window.addEventListener("keydown", function (callback){
-    player.movement(callback.key)
+    console.log(callback.key)
+        switch (callback.key) {
+            case "ArrowUp" : 
+                console.log('Up')   
+                player.jump() // untuk membuat player melompat           
+                break
+            case "ArrowLeft" :
+                console.log('kiri')
+                player.moveLeft() // untuk membuat player bergerak ke kiri
+                break
+            case "ArrowRight" : 
+                console.log('kanan')
+                player.moveRight() // untuk membuat player bergerak ke kanan
+                break
+            default :
+                break
+        }
 })
 
 animate() // untuk memulai animasi

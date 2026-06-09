@@ -22,25 +22,16 @@ class Player {
     // HeightJump = vi^2 / (2 * gravitasi)
     // vi + sqrt(2 * g * h)
 
+    jump() {
+        return this.velocity.y = -Math.sqrt(2 * this.gravity * this.heightJump) // - karena dia perlu ke atas.
+    }
 
-    movement(direction) {
-        console.log({direction})
-        switch (direction) {
-            case "ArrowUp" : 
-                console.log('Up')
-                this.velocity.y = -Math.sqrt(2 * this.gravity * this.heightJump) // - karena dia perlu ke atas.
-                break
-            case "ArrowLeft" :
-                console.log('kiri')
-                this.velocity.x = -1 * this.speed
-                break
-            case "ArrowRight" : 
-                console.log('kanan')
-                this.velocity.x = 1 * this.speed
-                break
-            default :
-                break
-        }
+    moveRight() {
+        return this.velocity.x = 1 * this.speed
+    }
+
+    moveLeft() {
+        return player.velocity.x = -1 * player.speed
     }
 
     update() {

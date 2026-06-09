@@ -20,5 +20,8 @@ class Ground {
 
         board.drawImage(this.image, this.position.x, this.position.y)
         board.drawImage(this.image, this.position.x, this.position.y, this.width, this.height) // untuk menyesuaikan ukuran gambar dengan ukuran canvas
+        // this.position.x += 5 // untuk membuat gambar bergerak ke kanan
+
+
     }
 }
