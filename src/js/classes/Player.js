@@ -49,11 +49,11 @@ class Player {
         }
 
         if(player.position.x < invisibleLeftWall) {
-            this.position.x = invisibleLeftWall
+            this.position.x += invisibleLeftWall
         }
 
         if(player.position.x > invisibleRightWall) {
-            this.position.x = invisibleRightWall
+            this.position.x -= invisibleRightWall
         }
     }
 
