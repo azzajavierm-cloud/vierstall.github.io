@@ -43,6 +43,7 @@ class Player {
         
         if(player.position.y > ground) {
             this.position.y = ground
+            this.jump() // untuk membuat player melompat terus menerus ketika menyentuh tanah
         }
     }
 
