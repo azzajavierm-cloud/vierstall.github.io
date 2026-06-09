@@ -33,7 +33,7 @@ const playerProperty = {
 // }
 
 // Buat Kelas Ground
-const ground = new Ground('/src/assets/background.png', canvas.width, canvas.height) //cuma instance belum di panggil methodnya
+const ground = new Ground('./src/assets/background.png', canvas.width, canvas.height) // path relatif agar berjalan di GitHub Pages
 
 // Buat Kelas Player
 const player = new Player(playerProperty) //cuma instance belum di panggil methodnya
