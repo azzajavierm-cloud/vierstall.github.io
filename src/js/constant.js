@@ -8,6 +8,6 @@ const ASPECT_RATIO = {
 
 // Buat Ukuran Display
 const DISPLAY_PIXEL = {
-    WIDTH: 64,
-    HEIGHT: 64
+    WIDTH: 80,
+    HEIGHT: 80
 }
