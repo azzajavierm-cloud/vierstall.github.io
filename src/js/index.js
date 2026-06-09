@@ -46,13 +46,15 @@ const player = new Player(playerProperty) //cuma instance belum di panggil metho
 // Buat Animasi Entity dan Papan
 function animate() {
     
+    ground.create() // baru di panggil methodnya untuk membuat papan permainannya
+
     player.create() 
     // enemy.create()
 
     player.update()
     // enemy.update()
 
-    ground.create() // baru di panggil methodnya untuk membuat papan permainannya
+    
 
     window.requestAnimationFrame(animate) // untuk membuat animasi terus berjalan
 }
