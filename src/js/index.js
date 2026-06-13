@@ -1,103 +1,96 @@
-const canvas = document.querySelector('canvas')
-// Buat papan Permainan 
-const board = canvas.getContext("2d")
+const canvas = document.getElementById('canvas1')
+const ctx = canvas.getContext('2d')
 
-const CANVAS_WIDTH = canvas.width = 512
-const CANVAS_HEIGHT = canvas.height = 512  
+console.log(ctx) //debug untuk cek canvas
 
-// input gambar
+const CANVAS_WIDTH = canvas.width = 600
+const CANVAS_HEIGHT = canvas.height = 600
+
 const playerImage = new Image()
-playerImage.src = './src/assets/soldier.png' // path relatif agar berjalan di GitHub Pages
+playerImage.src = './src/assets/shadow_dog.png'
 
+// ukkuran tilesheet dibagi kolom
+const spriteWidth = 575
+const spriteHeight = 523
+
+let playerState = 'sit' // default State / kondisi awal player
+
+// kontrol kecepatan animasi
+let gameFrame = 0
+
+const staggerFrame = 5
+
+// Kontrol untuk tidak ada blank space pada tilesheet
+const spriteAnimations = []
+const animationStates = [
+    {
+        name: 'idle',
+        frames: 7,
+    },
+    {
+        name: 'jump',
+        frames: 7,
+    },
+    {
+        name: 'fall',
+        frames: 7,
+    },
+    {
+        name: 'run',
+        frames: 9,
+    },
+    {
+        name: 'dizzy',
+        frames: 11,
+    },
+    {
+        name: 'sit',
+        frames: 5,
+    },
+    {
+        name: 'roll',
+        frames: 7,
+    },
+    {
+        name: 'bite',
+        frames: 7,
+    },
+    {
+        name: 'ko',
+        frames: 12,
+    },
+    {
+        name: 'getHit',
+        frames: 7,
+    }
+] 
+animationStates.forEach((state, index) => {
+    let frames = {
+        loc: [],
+    }
+    for (let j = 0; j < state.frames; j++){
+        let positionX = j * spriteWidth
+        let positionY = index * spriteHeight
+        frames.loc.push({x: positionX, y: positionY})
+    }
+    spriteAnimations[state.name] = frames;
+})
+console.log(spriteAnimations) //debug frames
+
+// function untuk animasi
 function animate() {
-    board.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT) // untuk membersihkan canvas setiap frame    
-    // board.fillRect(50, 50, 100, 100) // untuk membuat persegi panjang di canvas
-    // board.drawImage(image, src_x, src_y, src_w, src_h, dest_x, dest_y, dest_w, dest_h) // untuk menggambar gambar di canvas
-    board.drawImage(playerImage, sx, sy, sw, sh, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT) // untuk menggambar gambar di canvas
-    requestAnimationFrame(animate) // untuk membuat animasi terus berjalan
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    
+    let position = Math.floor(gameFrame/staggerFrame) % spriteAnimations[playerState].loc.length;
+    
+    let frameX = spriteWidth * position
+    let frameY = spriteAnimations[playerState].loc[position].y
+    
+    ctx.drawImage(playerImage, frameX, frameY, spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight)
+    
+    gameFrame++
+
+    requestAnimationFrame(animate)
 }
 
-animate() // untuk memulai animasi
-
-
-
-
-// // Custom canvas
-// canvas.width = DISPLAY_PIXEL.WIDTH * ASPECT_RATIO.WIDTH
-// canvas.height = DISPLAY_PIXEL.HEIGHT * ASPECT_RATIO.HEIGHT
-
-// // note koordinat dimulai dari 0 dan tidak ada negatif
-
-// // Property Player
-// const playerProperty = {
-//     width: 64,
-//     height: 64,
-//     speed: 5,
-//     color: "tomato",
-//     position: {
-//         x: 0, 
-//         y: canvas.height - 64
-//     }
-// }
-
-// // // Property Enemy
-// // const enemyProperty = {
-// //     width: 64,
-// //     height: 64,
-// //     speed: 1.5,
-// //     color: "lightyellow",
-// //     position: {
-// //         x: canvas.width - 64, 
-// //         y: canvas.height - 64
-// //     }
-// // }
-
-// // Buat Kelas Ground
-// const ground = new Ground('./src/assets/background.png', canvas.width, canvas.height) // path relatif agar berjalan di GitHub Pages
-
-// // Buat Kelas Player
-// const player = new Player(playerProperty) //cuma instance belum di panggil methodnya
-
-// // Buat Kelas Enemy
-// // const enemy = new Enemy(enemyProperty) //cuma instance belum di panggil methodnya
-
-
-
-// // Buat Animasi Entity dan Papan
-// function animate() {
-    
-//     ground.create() // baru di panggil methodnya untuk membuat papan permainannya
-
-//     player.create() 
-//     // enemy.create()
-
-//     player.update()
-//     // enemy.update()
-
-    
-
-//     window.requestAnimationFrame(animate) // untuk membuat animasi terus berjalan
-// }
-
-// window.addEventListener("keydown", function (callback){
-//     console.log(callback.key)
-//         switch (callback.key) {
-//             case "ArrowUp" : 
-//                 console.log('Up')   
-//                 player.jump() // untuk membuat player melompat           
-//                 break
-//             case "ArrowLeft" :
-//                 console.log('kiri')
-//                 player.moveLeft() // untuk membuat player bergerak ke kiri
-//                 break
-//             case "ArrowRight" : 
-//                 console.log('kanan')
-//                 player.moveRight() // untuk membuat player bergerak ke kanan
-//                 break
-//             default :
-//                 break
-//         }
-// })
-
-// animate() // untuk memulai animasi
-
+animate()
