@@ -13,7 +13,7 @@ playerImage.src = './src/assets/shadow_dog.png'
 const spriteWidth = 575
 const spriteHeight = 523
 
-let playerState = 'sit' // default State / kondisi awal player
+let playerState = 'idle' // default State / kondisi awal player
 
 // kontrol kecepatan animasi
 let gameFrame = 0
